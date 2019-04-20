@@ -35,7 +35,7 @@ module.exports = function(app) {
         case 'verifySignup': // confirming verification
           tokenLink = getLink('verify', user.verifyToken)
           email = {
-             from: process.env.FROM_EMAIL,
+             from: app.get('smtp').from,
              to: user.email,
              subject: 'Confirm Signup',
              html: 'Thanks for verifying your email'
@@ -44,14 +44,25 @@ module.exports = function(app) {
           break
 
         case 'sendResetPwd':
+        console.log(user)
           tokenLink = getLink('reset', user.resetToken)
-          email = {}
+          email = {
+            from: app.get('smtp').from,
+            to: user.email,
+            subject: 'Reset Password Request',
+            html: tokenLink
+          }
           return sendEmail(email)
           break
 
         case 'resetPwd':
           tokenLink = getLink('reset', user.resetToken)
-          email = {}
+          email = {
+            from: app.get('smtp').from,
+            to: user.email,
+            subject: 'Reset Password Complete',
+            html: 'Your password have been reset.'
+          }
           return sendEmail(email)
           break
 

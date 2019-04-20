@@ -8,6 +8,7 @@
 
       <div v-if="!user">
         <v-toolbar-items>
+          <v-btn flat to="/register">Sign Up</v-btn>
           <v-btn flat to="/login">Login</v-btn>
         </v-toolbar-items>
       </div>
