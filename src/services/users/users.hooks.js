@@ -25,6 +25,7 @@ module.exports = {
       commonHooks.iff(
         commonHooks.isProvider('external'),
           commonHooks.preventChanges(
+            true,
             'email',
             'isVerified',
             'verifyToken',
